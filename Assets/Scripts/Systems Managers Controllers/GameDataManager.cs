@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace TechnicalTask.TimerMecha
@@ -8,12 +9,15 @@ namespace TechnicalTask.TimerMecha
 
         public GameDataManager(int incTime) => currentTime = incTime;
 
-        public void CreateDataObject(int incTime)
+        public void CreateDataObject(int incTime) => StartCoroutine(DelayAndCreateDataObject(incTime));
+
+        IEnumerator DelayAndCreateDataObject(int incTime)
         {
+            yield return new WaitForSeconds(1);
+
             GameDataManager gameData = new GameDataManager(incTime);
 
-            // LOAD VALUE FROM DATA OBJECT
-            Debug.Log(gameData.currentTime);
+            Debug.Log($"GAME TIME {gameData.currentTime}");
         }
     }
 }
